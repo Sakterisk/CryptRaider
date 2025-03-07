@@ -60,6 +60,9 @@ void ACryptRaiderCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInp
 
 		// Looking
 		EnhancedInputComponent->BindAction(LookAction, ETriggerEvent::Triggered, this, &ACryptRaiderCharacter::Look);
+
+		// Grabbing
+		EnhancedInputComponent->BindAction(GrabAction, ETriggerEvent::Triggered, this, &ACryptRaiderCharacter::Grab);
 	}
 	else
 	{
@@ -92,4 +95,9 @@ void ACryptRaiderCharacter::Look(const FInputActionValue& Value)
 		AddControllerYawInput(LookAxisVector.X);
 		AddControllerPitchInput(LookAxisVector.Y);
 	}
+}
+
+void ACryptRaiderCharacter::Grab(const FInputActionValue& Value)
+{
+	//UE_LOG(LogTemplateCharacter, Warning, TEXT("Grab: %s"), *Value.ToString());
 }

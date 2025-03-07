@@ -36,6 +36,9 @@ class ACryptRaiderCharacter : public ACharacter
 	/** Move Input Action */
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category=Input, meta=(AllowPrivateAccess = "true"))
 	UInputAction* MoveAction;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category=Input, meta=(AllowPrivateAccess = "true"))
+	UInputAction* GrabAction;
 	
 public:
 	ACryptRaiderCharacter();
@@ -55,6 +58,9 @@ protected:
 
 	/** Called for looking input */
 	void Look(const FInputActionValue& Value);
+
+	/** Called for grabbing input */
+	void Grab(const FInputActionValue& Value);
 
 protected:
 	// APawn interface
