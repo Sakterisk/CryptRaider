@@ -45,16 +45,19 @@ void UGrabber::Grab()
 	if (GetGrabbableInReach(HitResult))
 	{
 		UPrimitiveComponent* ComponentToGrab = HitResult.GetComponent();
+		HitResult.GetActor()->Tags.Add("Grabbed");
 		ComponentToGrab->WakeAllRigidBodies();
+		HitResult.GetActor()->DetachFromActor(FDetachmentTransformRules::KeepWorldTransform);
+		ComponentToGrab->SetSimulatePhysics(true);
 		PhysicsHandle->GrabComponentAtLocationWithRotation(ComponentToGrab, NAME_None, HitResult.Location, GetComponentRotation());
 	}
 }
 
 void UGrabber::Release()
 {
-	UE_LOG(LogTemp, Display, TEXT("Release"));
 	if (!PhysicsHandle) return;
 	if (!PhysicsHandle->GetGrabbedComponent()) return;
+	PhysicsHandle->GetGrabbedComponent()->GetOwner()->Tags.Remove("Grabbed");
 	PhysicsHandle->ReleaseComponent();
 }
 

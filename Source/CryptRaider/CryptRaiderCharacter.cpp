@@ -99,5 +99,5 @@ void ACryptRaiderCharacter::Look(const FInputActionValue& Value)
 
 void ACryptRaiderCharacter::Grab(const FInputActionValue& Value)
 {
-	//UE_LOG(LogTemplateCharacter, Warning, TEXT("Grab: %s"), *Value.ToString());
+	
 }

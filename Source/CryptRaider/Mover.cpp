@@ -20,7 +20,7 @@ void UMover::BeginPlay()
 	Super::BeginPlay();
 
 	Owner = GetOwner();
-	FVector StartLocation = Owner->GetActorLocation();
+	StartLocation = Owner->GetActorLocation();
 	Speed = FVector::Dist(StartLocation, StartLocation + OffsetLocation) / TimeToReachTarget;
 	EndLocation = StartLocation + OffsetLocation;
 }
@@ -31,10 +31,23 @@ void UMover::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponent
 {
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
 
-	if (Owner && bIsMoving)
+	if (Owner)
 	{
-		FVector CurrentLocation = Owner->GetActorLocation();
-		Owner->SetActorLocation(FMath::VInterpConstantTo(CurrentLocation, EndLocation, DeltaTime, Speed));
+		if (bIsMoving)
+		{
+			FVector CurrentLocation = Owner->GetActorLocation();
+			Owner->SetActorLocation(FMath::VInterpConstantTo(CurrentLocation, EndLocation, DeltaTime, Speed));
+		}
+		else
+		{
+			FVector CurrentLocation = Owner->GetActorLocation();
+			Owner->SetActorLocation(FMath::VInterpConstantTo(CurrentLocation, StartLocation, DeltaTime, Speed));
+		}
 	}
+}
+
+void UMover::SetIsMoving(bool bIsMovingToSet)
+{
+	bIsMoving = bIsMovingToSet;
 }
 

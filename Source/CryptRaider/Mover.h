@@ -25,6 +25,8 @@ public:
 	// Called every frame
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
 
+	void SetIsMoving(bool bIsMovingToSet);
+
 private:
 	AActor* Owner = nullptr;
 
@@ -37,6 +39,7 @@ private:
 	UPROPERTY(EditAnywhere)
 	bool bIsMoving = false;
 
+	FVector StartLocation;
 	FVector EndLocation;
 	float Speed;
 };
